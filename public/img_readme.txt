@@ -1,1 +1,1 @@
-Put your image assets under public/img if needed.
+ไวใส่รู้แล้วเปลั้ยน .txt ออกด้วยนะจ๊ะ
