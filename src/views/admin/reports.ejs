@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CP KKU Study Notes</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">CP KKU STUDY NOTES</a>
+  <nav>
+    <a href="/">หน้าหลัก</a>
+    <a href="/search">ค้นหาสรุป</a>
+    <a href="/community">พูดคุย</a>
+    <% if (currentUser){ %>
+      <a href="/notifications">แจ้งเตือน</a>
+      <a href="/posts/new">+ โพสต์สรุป</a>
+      <a href="/threads/new">+ ตั้งคำถาม</a>
+      <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
+      <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
+      <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
+    <% } else { %>
+      <a href="/login">เข้าสู่ระบบ</a>
+      <a href="/register">สมัครสมาชิก</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">
+<h2>รายงานปัญหา</h2>
+<h3>จากโพสต์สรุป</h3>
+<ul class="list">
+  <% posts.forEach(p=>{ p.reports.forEach((r,idx)=>{ %>
+    <li>
+      <b><%= p.title %></b> - <%= r.reasonTitle %> (<%= r.status %>)
+      <form method="post" action="/admin/reports/post/<%= p.slug %>/<%= idx %>/status" class="inline">
+        <select name="status">
+          <option value="pending">ยังไม่ดำเนินการ</option>
+          <option value="in_progress">กำลังดำเนินการ</option>
+          <option value="resolved">ดำเนินการเสร็จสิ้น</option>
+        </select>
+        <button>อัปเดต</button>
+      </form>
+      <form method="post" action="/admin/posts/<%= p.slug %>/delete" class="inline">
+        <button class="danger">ลบโพสต์</button>
+      </form>
+    </li>
+  <% }) }) %>
+</ul>
+<h3>จากกระทู้พูดคุย</h3>
+<ul class="list">
+  <% threads.forEach(t=>{ t.reports.forEach((r,idx)=>{ %>
+    <li>
+      <b><%= t.title %></b> - <%= r.reasonTitle %> (<%= r.status %>)
+      <form method="post" action="/admin/reports/thread/<%= t._id %>/<%= idx %>/status" class="inline">
+        <select name="status">
+          <option value="pending">ยังไม่ดำเนินการ</option>
+          <option value="in_progress">กำลังดำเนินการ</option>
+          <option value="resolved">ดำเนินการเสร็จสิ้น</option>
+        </select>
+        <button>อัปเดต</button>
+      </form>
+      <form method="post" action="/admin/threads/<%= t._id %>/delete" class="inline">
+        <button class="danger">ลบกระทู้</button>
+      </form>
+    </li>
+  <% }) }) %>
+</ul>
+</main>
+<footer class="footer">© 2025 CP KKU Study Notes (MVP)</footer>
+</body>
+</html>

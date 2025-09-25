@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CP KKU Study Notes</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">CP KKU STUDY NOTES</a>
+  <nav>
+    <a href="/">หน้าหลัก</a>
+    <a href="/search">ค้นหาสรุป</a>
+    <a href="/community">พูดคุย</a>
+    <% if (currentUser){ %>
+      <a href="/notifications">แจ้งเตือน</a>
+      <a href="/posts/new">+ โพสต์สรุป</a>
+      <a href="/threads/new">+ ตั้งคำถาม</a>
+      <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
+      <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
+      <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
+    <% } else { %>
+      <a href="/login">เข้าสู่ระบบ</a>
+      <a href="/register">สมัครสมาชิก</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">
+<h2>สร้างโพสต์สรุป</h2>
+<form method="post" action="/posts" enctype="multipart/form-data">
+  <label>ชื่อเรื่อง <input name="title" required/></label>
+  <label>เนื้อหา <textarea name="body" rows="8" required></textarea></label>
+  <label>แท็ก (เลือกอย่างน้อย 1)
+    <select name="tags" multiple size="6" required>
+      <% ['CS','AI','IT','CY','GIS','Physics','Chemistry','Biology','Math','English','GE','Free'].forEach(t=>{ %>
+        <option value="<%= t %>"><%= t %></option>
+      <% }) %>
+    </select>
+  </label>
+  <label>ภาพหน้าปก <input type="file" name="cover" accept="image/*"/></label>
+  <button>โพสต์</button>
+</form>
+</main>
+<footer class="footer">© 2025 CP KKU Study Notes (MVP)</footer>
+</body>
+</html>

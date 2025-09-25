@@ -1,0 +1,27 @@
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#f5fbff;color:#1b2a3a}
+a{color:#0d63a5;text-decoration:none} a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:20px auto;padding:0 16px}
+.topbar{display:flex;justify-content:space-between;align-items:center;background:#eef7ff;padding:10px 16px;border-bottom:1px solid #cfe7ff;position:sticky;top:0}
+.brand{font-weight:800;letter-spacing:.5px}
+nav a, nav form{margin-left:12px}
+.linklike{background:none;border:none;color:#0d63a5;cursor:pointer}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.card{background:white;border:1px solid #e6eef5;border-radius:12px;overflow:hidden;display:block}
+.cover{width:100%;height:120px;object-fit:cover;background:#dbeafe}
+.cover-xl{width:100%;max-height:320px;object-fit:cover;background:#dbeafe;border-radius:12px}
+.pad{padding:10px}
+.ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.muted{color:#6b7280;font-size:.9em}
+.tags .tag{display:inline-block;background:#eaf5ff;border:1px solid #cfe7ff;padding:2px 6px;border-radius:999px;margin-right:4px;margin-top:4px;font-size:.75rem}
+footer.footer{margin:40px 0;padding:20px;color:#6b7280;text-align:center}
+.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.post{background:white;border:1px solid #e6eef5;border-radius:12px;padding:12px}
+.alert{background:#fff3cd;border:1px solid #ffe69c;padding:10px;border-radius:8px;margin:10px 0}
+button,.button,select,input,textarea{border-radius:10px;border:1px solid #cfe7ff;padding:8px 10px}
+button,.button{background:#0ea5e9;color:white;border:none} .danger{background:#ef4444}
+.table{width:100%;background:white;border:1px solid #e6eef5;border-radius:12px;border-collapse:collapse}
+.table th,.table td{padding:8px;border-bottom:1px solid #e6eef5}
+.list{list-style:none;padding:0} .list li{background:white;border:1px solid #e6eef5;border-radius:10px;padding:10px;margin:8px 0}
+.inline{display:inline-block;margin-left:6px}
+.comments{list-style:none;padding:0}
+.read{opacity:.6}

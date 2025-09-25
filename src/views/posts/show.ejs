@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CP KKU Study Notes</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">CP KKU STUDY NOTES</a>
+  <nav>
+    <a href="/">หน้าหลัก</a>
+    <a href="/search">ค้นหาสรุป</a>
+    <a href="/community">พูดคุย</a>
+    <% if (currentUser){ %>
+      <a href="/notifications">แจ้งเตือน</a>
+      <a href="/posts/new">+ โพสต์สรุป</a>
+      <a href="/threads/new">+ ตั้งคำถาม</a>
+      <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
+      <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
+      <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
+    <% } else { %>
+      <a href="/login">เข้าสู่ระบบ</a>
+      <a href="/register">สมัครสมาชิก</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">
+<article class="post">
+  <% if (post.coverImage){ %><img src="<%= post.coverImage %>" class="cover-xl"/><% } %>
+  <h1><%= post.title %></h1>
+  <p class="muted">โดย <%= post.author?.username %> · ♥ <%= post.likes.length %> · 👁️ <%= post.views %></p>
+  <div class="tags">
+    <% (post.tags||[]).forEach(t=>{ %><span class="tag"><%= t %></span><% }) %>
+  </div>
+  <p><%= post.body %></p>
+  <div class="row">
+    <form method="post" action="/posts/<%= post.slug %>/like"><button>ถูกใจ</button></form>
+    <% if (currentUser && (currentUser.id === String(post.author._id) || currentUser.role==='admin')){ %>
+      <a class="button" href="/posts/<%= post.slug %>/edit">แก้ไข</a>
+      <form method="post" action="/posts/<%= post.slug %>/delete"><button class="danger">ลบโพสต์</button></form>
+    <% } else if (currentUser) { %>
+      <a class="button" href="/posts/<%= post.slug %>/report">รายงาน</a>
+    <% } %>
+  </div>
+  <hr/>
+  <h3>คอมเมนต์</h3>
+  <ul class="comments">
+    <% post.comments.forEach(c=>{ %>
+      <li><b><%= c.author?.username %></b> <span class="muted"><%= new Date(c.createdAt).toLocaleString() %></span><br/><%= c.body %></li>
+    <% }) %>
+  </ul>
+  <% if (currentUser){ %>
+  <form method="post" action="/posts/<%= post.slug %>/comments">
+    <textarea name="body" rows="3" required></textarea>
+    <button>ส่งคอมเมนต์</button>
+  </form>
+  <% } else { %><p class="muted">ต้องเข้าสู่ระบบเพื่อคอมเมนต์</p><% } %>
+</article>
+</main>
+<footer class="footer">© 2025 CP KKU Study Notes (MVP)</footer>
+</body>
+</html>
