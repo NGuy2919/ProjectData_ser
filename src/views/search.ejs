@@ -15,8 +15,8 @@
     <a href="/community">พูดคุย</a>
     <% if (currentUser){ %>
       <a href="/notifications">แจ้งเตือน</a>
-      <a href="/posts/new">+ โพสต์สรุป</a>
-      <a href="/threads/new">+ ตั้งคำถาม</a>
+      <!-- <a href="/posts/new">+ โพสต์สรุป</a> --> 
+      <!-- <a href="/threads/new">+ ตั้งคำถาม</a> --> 
       <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
       <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
       <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
@@ -50,5 +50,11 @@
   <% }) %>
 </div>
 </main>
+
+<a href="/posts/new" class="fab" aria-label="สร้างโพสต์ใหม่">
+  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+    <path d="M11 5a1 1 0 0 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5z" fill="currentColor"/>
+  </svg>
+</a>
 </body>
 </html>
