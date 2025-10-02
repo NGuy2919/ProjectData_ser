@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CP KKU Study Notes</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">CP KKU STUDY NOTES</a>
+  <nav>
+    <a href="/">หน้าหลัก</a>
+    <a href="/search">ค้นหาสรุป</a>
+    <a href="/community">พูดคุย</a>
+    <% if (currentUser){ %>
+      <a href="/notifications">แจ้งเตือน</a>
+      <!-- <a href="/posts/new">+ โพสต์สรุป</a> --> 
+      <!-- <a href="/threads/new">+ ตั้งคำถาม</a> --> 
+      <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
+      <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
+      <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
+    <% } else { %>
+      <a href="/login">เข้าสู่ระบบ</a>
+      <a href="/register">สมัครสมาชิก</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">
+<h2>ค้นหาสรุป</h2>
+<form class="row" method="get" action="/search">
+  <input name="q" placeholder="คำค้น" value="<%= q %>"/>
+  <select name="tag">
+    <option value="">--แท็กทั้งหมด--</option>
+    <% ['CS','AI','IT','CY','GIS','Physics','Chemistry','Biology','Math','English','GE','Free'].forEach(t=>{ %>
+      <option value="<%= t %>" <%= tag===t?'selected':'' %>><%= t %></option>
+    <% }) %>
+  </select>
+  <button>ค้นหา</button>
+</form>
+<div class="grid">
+  <% posts.forEach(p=>{ %>
+    <a class="card" href="/posts/<%= p.slug %>">
+      <% if (p.coverImage){ %><img src="<%= p.coverImage %>" class="cover"/><% } %>
+      <div class="pad">
+        <h3 class="ellipsis"><%= p.title %></h3>
+        <p class="muted">♥ <%= p.likes.length %> · 👁️ <%= p.views %></p>
+      </div>
+    </a>
+  <% }) %>
+</div>
+</main>
+
+<a href="/posts/new" class="fab" aria-label="สร้างโพสต์ใหม่">
+  <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+    <path d="M11 5a1 1 0 0 1 2 0v6h6a1 1 0 1 1 0 2h-6v6a1 1 0 1 1-2 0v-6H5a1 1 0 1 1 0-2h6V5z" fill="currentColor"/>
+  </svg>
+</a>
+</body>
+</html>

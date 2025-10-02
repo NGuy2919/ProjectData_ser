@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CP KKU Study Notes</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">CP KKU STUDY NOTES</a>
+  <nav>
+    <a href="/">หน้าหลัก</a>
+    <a href="/search">ค้นหาสรุป</a>
+    <a href="/community">พูดคุย</a>
+    <% if (currentUser){ %>
+      <a href="/notifications">แจ้งเตือน</a>
+      <!-- <a href="/posts/new">+ โพสต์สรุป</a> --> 
+      <!-- <a href="/threads/new">+ ตั้งคำถาม</a> --> 
+      <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
+      <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
+      <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
+    <% } else { %>
+      <a href="/login">เข้าสู่ระบบ</a>
+      <a href="/register">สมัครสมาชิก</a>
+    <% } %>
+  </nav>
+</header>
+<main class="container">
+<h2>แดชบอร์ดแอดมิน</h2>
+<div class="stats">
+  <div class="stat">ผู้ใช้ทั้งหมด <b><%= users %></b></div>
+  <div class="stat">โน้ตทั้งหมด <b><%= posts %></b></div>
+  <div class="stat">รายงานคงค้าง <b><%= totalReports %></b></div>
+</div>
+<nav class="row">
+  <a class="button" href="/admin/users">จัดการผู้ใช้</a>
+  <a class="button" href="/admin/reports">รายงานปัญหา</a>
+</nav>
+</main>
+</body>
+</html>
