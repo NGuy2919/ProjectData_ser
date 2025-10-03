@@ -49,6 +49,7 @@ app.use(session({
 // expose user to templates
 app.use((req,res,next)=>{
   res.locals.currentUser = req.session.user || null;
+  res.locals.title = '';
   next();
 });
 
@@ -67,7 +68,7 @@ app.get('/', async (req,res)=>{
 });
 
 // Search by tag & keyword
-app.get(' /search ', async (req,res)=>{
+app.get('/search', async (req,res)=>{
   const {q, tag} = req.query;
   const filter = {};
   if (tag) filter.tags = tag;
