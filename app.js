@@ -12,6 +12,7 @@ import postRoutes from './src/routes/posts.js';
 import threadRoutes from './src/routes/threads.js';
 import adminRoutes from './src/routes/admin.js';
 import notifyRoutes from './src/routes/notifications.js';
+import expressEjsLayouts from 'express-ejs-layouts';
 
 dotenv.config();
 
@@ -28,6 +29,8 @@ mongoose.connect(MONGO_URI)
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src', 'views'));
+app.use(expressEjsLayouts);
+app.set('layout', 'layouts/mainbar'); // default layout
 
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -60,17 +63,17 @@ app.use('/admin', adminRoutes);
 import Post from './src/models/Post.js';
 app.get('/', async (req,res)=>{
   const posts = await Post.find().sort({createdAt:-1}).limit(12).populate('author');
-  res.render('home', { posts });
+  res.render('home', { title: 'หน้าแรก', posts });
 });
 
 // Search by tag & keyword
-app.get('/search', async (req,res)=>{
+app.get(' /search ', async (req,res)=>{
   const {q, tag} = req.query;
   const filter = {};
   if (tag) filter.tags = tag;
   if (q) filter.$or = [{title: new RegExp(q,'i')},{body: new RegExp(q,'i')}];
   const posts = await Post.find(filter).sort({createdAt:-1}).limit(50).populate('author');
-  res.render('search', { posts, q:q||'', tag:tag||'' });
+  res.render('search', { title: 'ค้นหาสรุป', posts, q:q||'', tag:tag||'' });
 });
 
 app.listen(PORT, ()=>console.log(`App running on http://localhost:${PORT}`));
