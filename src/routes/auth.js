@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User.js';
+import { requireAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -66,5 +67,16 @@ router.post('/edit-profile', async (req,res)=>{
 
   res.render('auth/profile', {user, message:'อัปเดตโปรไฟล์แล้ว'});
 });
+
+// บันทึก/ยกเลิกบันทึกโพสต์
+router.get('/saved-posts', requireAuth, async (req, res) => {
+  const user = await User.findById(req.session.user.id).populate({
+    path: 'savePosts',
+    populate: { path: 'author' } // ดึง author ของแต่ละ post
+  });
+
+  res.render('auth/saved-posts', { savedPosts: user.savePosts, currentUser: req.session.user });
+});
+
 
 export default router;
