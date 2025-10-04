@@ -1,53 +1,224 @@
-body{
-    font-family:system-ui,
-    -apple-system,
-    Segoe UI,Roboto,
-    Arial,sans-serif;
-    margin:0;background:#f5fbff;
-    color:#1b2a3a
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+  font-family: "Kanit", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  background: #f5fbff;
+  color: #1b2a3a;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
-a{
-    color:#0d63a5;text-decoration:none
-} 
-a:hover{
-    text-decoration:underline
+
+a {
+  color: #0d63a5;
+  text-decoration: none;
 }
-.container{
-    max-width:1000px;
-    margin:20px auto;
-    padding:0 16px
+
+
+a:hover {
+  text-decoration: underline;
 }
-.topbar{
-    display:flex;justify-content:space-between;
-    align-items:center;
-    background:#eef7ff;
-    padding:10px 16px;
-    border-bottom:1px solid #cfe7ff;
-    position:sticky;
-    top:0
+
+.container {
+  max-width: 1000px;
+  margin: 20px auto;
+  padding: 0 16px;
 }
-.brand{font-weight:800;letter-spacing:.5px}
-nav a, nav form{margin-left:12px}
-.linklike{background:none;border:none;color:#0d63a5;cursor:pointer}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-.card{background:white;border:1px solid #e6eef5;border-radius:12px;overflow:hidden;display:block}
-.cover{width:100%;height:120px;object-fit:cover;background:#dbeafe}
-.cover-xl{width:100%;max-height:320px;object-fit:cover;background:#dbeafe;border-radius:12px}
-.pad{padding:10px}
-.ellipsis{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.muted{color:#6b7280;font-size:.9em}
-.tags .tag{display:inline-block;background:#eaf5ff;border:1px solid #cfe7ff;padding:2px 6px;border-radius:999px;margin-right:4px;margin-top:4px;font-size:.75rem}
-.row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.post{background:white;border:1px solid #e6eef5;border-radius:12px;padding:12px}
-.alert{background:#fff3cd;border:1px solid #ffe69c;padding:10px;border-radius:8px;margin:10px 0}
-button,.button,select,input,textarea{border-radius:10px;border:1px solid #cfe7ff;padding:8px 10px}
-button,.button{background:#0ea5e9;color:white;border:none} .danger{background:#ef4444}
-.table{width:100%;background:white;border:1px solid #e6eef5;border-radius:12px;border-collapse:collapse}
-.table th,.table td{padding:8px;border-bottom:1px solid #e6eef5}
-.list{list-style:none;padding:0} .list li{background:white;border:1px solid #e6eef5;border-radius:10px;padding:10px;margin:8px 0}
-.inline{display:inline-block;margin-left:6px}
-.comments{list-style:none;padding:0}
-.read{opacity:.6}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #FBF8EF;
+  padding: 10px 16px;
+  border-bottom: 1px solid #cfe7ff;
+  position: sticky;
+  top: 0;
+  font-weight: 600;
+  padding: 15px;
+}
+
+.brand {
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+
+/* Topbar nav layout */
+.topbar nav {
+  display: flex;
+  align-items: center;
+}
+
+.topbar .nav-links {
+  display: flex;
+  align-items: center;
+}
+
+.topbar .nav-links a,
+.topbar .nav-links form {
+  margin-left: 16px;
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.nav-toggle svg {
+  width: 24px;
+  height: 24px;
+}
+
+
+.linklike {
+  background: none;
+  border: none;
+  color: #0d63a5;
+  cursor: pointer;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #e6eef5;
+  border-radius: 12px;
+  overflow: hidden;
+  display: block;
+}
+
+.cover {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  background: #dbeafe;
+}
+
+.cover-xl {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  background: #dbeafe;
+  border-radius: 12px;
+}
+
+.pad {
+  padding: 10px;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.muted {
+  color: #6b7280;
+  font-size: .9em;
+}
+
+.tags .tag {
+  display: inline-block;
+  background: #eaf5ff;
+  border: 1px solid #cfe7ff;
+  padding: 2px 6px;
+  border-radius: 999px;
+  margin-right: 4px;
+  margin-top: 4px;
+  font-size: .75rem;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.post {
+  background: white;
+  border: 1px solid #e6eef5;
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.alert {
+  background: #fff3cd;
+  border: 1px solid #ffe69c;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+button,
+.button,
+select,
+input,
+textarea {
+  border-radius: 10px;
+  border: 1px solid #cfe7ff;
+  padding: 8px 10px;
+}
+
+button,
+.button {
+  background: #0ea5e9;
+  color: white;
+  border: none;
+}
+
+.danger {
+  background: #ef4444;
+}
+
+.table {
+  width: 100%;
+  background: white;
+  border: 1px solid #e6eef5;
+  border-radius: 12px;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 8px;
+  border-bottom: 1px solid #e6eef5;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  background: white;
+  border: 1px solid #e6eef5;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 8px 0;
+}
+
+.inline {
+  display: inline-block;
+  margin-left: 6px;
+}
+
+.comments {
+  list-style: none;
+  padding: 0;
+}
+
+.read {
+  opacity: .6;
+}
 
 
 /* ปุ่ม สร้างโพส */
@@ -65,23 +236,27 @@ button,.button{background:#0ea5e9;color:white;border:none} .danger{background:#e
   text-decoration: none;
   color: #fff;
   background: #0ea5e9;
-  box-shadow: 0 12px 24px rgba(0,0,0,.18), 0 6px 12px rgba(0,0,0,.12);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, .18), 0 6px 12px rgba(0, 0, 0, .12);
   transition: box-shadow .2s ease, transform .15s ease, background-color .2s ease;
   z-index: 1000;
 }
+
 .fab:hover {
   background: #0284c7;
   transform: translateY(-2px);
-  box-shadow: 0 18px 28px rgba(0,0,0,.22), 0 8px 14px rgba(0,0,0,.14);
+  box-shadow: 0 18px 28px rgba(0, 0, 0, .22), 0 8px 14px rgba(0, 0, 0, .14);
 }
+
 .fab:active {
   transform: translateY(0) scale(.98);
-  box-shadow: 0 10px 18px rgba(0,0,0,.18), 0 6px 12px rgba(0,0,0,.12);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .18), 0 6px 12px rgba(0, 0, 0, .12);
 }
+
 .fab:focus-visible {
   outline: 3px solid #38bdf8;
   outline-offset: 3px;
 }
+
 .fab svg {
   width: 44%;
   height: 44%;
@@ -90,6 +265,81 @@ button,.button{background:#0ea5e9;color:white;border:none} .danger{background:#e
 
 /* ขนาดเล็กลงบนจอมือถือ */
 @media (max-width: 480px) {
-  .fab { width: 56px; height: 56px; }
+  .fab {
+    width: 56px;
+    height: 56px;
+  }
 }
- /*ปิด*/ 
+
+/* Responsive topbar: collapse nav into hamburger under 720px */
+@media (max-width: 720px) {
+  .topbar {
+    padding: 10px
+  }
+
+  .brand {
+    font-size: 0.95rem
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    margin-left: auto;
+    z-index: 1100
+  }
+
+  .topbar nav {
+    position: relative
+  }
+
+  .topbar .nav-links {
+    position: absolute;
+    right: 16px;
+    top: calc(100% + 8px);
+    background: #eef7ff;
+    border: 1px solid #cfe7ff;
+    border-radius: 10px;
+    padding: 8px 10px;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 160px;
+    box-shadow: 0 8px 18px rgba(11, 35, 55, .08);
+    transform-origin: top right;
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(.95);
+    transition: opacity .15s ease, transform .15s ease, visibility .15s
+  }
+
+  .topbar .nav-links a {
+    margin: 8px 0
+  }
+
+  .topbar .nav-links form {
+    margin: 8px 0
+  }
+
+  .topbar .nav-links.open {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1)
+  }
+}
+
+/* hero section: responsive heading & subtitle */
+.hero {
+  max-width: 1000px;
+  margin: 18px auto 8px;
+  padding: 8px 16px;
+  text-align: center
+}
+
+.hero h1 {
+  font-size: clamp(1.4rem, 2.5vw, 2.2rem);
+  margin: 0
+}
+
+.hero p {
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+  margin-top: 6px;
+  color: var(--muted, #6b7280)
+}
