@@ -1,42 +1,80 @@
 <!DOCTYPE html>
 <html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CP KKU Study Notes</title>
-  <link rel="stylesheet" href="/style.css"/>
-</head>
-<body>
-<header class="topbar">
-  <a class="brand" href="/">CP KKU STUDY NOTES</a>
-  <nav>
-    <a href="/">หน้าหลัก</a>
-    <a href="/search">ค้นหาสรุป</a>
-    <a href="/community">พูดคุย</a>
-    <% if (currentUser){ %>
-      <a href="/notifications">แจ้งเตือน</a>
-      <!-- <a href="/posts/new">+ โพสต์สรุป</a> --> 
-      <!-- <a href="/threads/new">+ ตั้งคำถาม</a> --> 
-      <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
-      <form action="/logout" method="post" style="display:inline"><button class="linklike">ออกจากระบบ</button></form>
-      <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
-    <% } else { %>
-      <a href="/login">เข้าสู่ระบบ</a>
-      <a href="/register">สมัครสมาชิก</a>
-    <% } %>
-  </nav>
-</header>
-<main class="container">
-<h2>โปรไฟล์ของฉัน</h2>
-<% if (message){ %><div class="alert"><%= message %></div><% } %>
-<form method="post">
-  <label>ชื่อผู้ใช้ <input name="username" value="<%= user.username %>"/></label>
-  <label>อีเมล <input name="email" value="<%= user.email %>"/></label>
-  <label>สาขา/โปรแกรม <input name="program" value="<%= user.program||'' %>"/></label>
-  <label>ชั้นปี <input name="year" value="<%= user.year||'' %>"/></label>
-  <label>แนะนำตัว <textarea name="bio"><%= user.bio||'' %></textarea></label>
-  <button>บันทึก</button>
-</form>
-</main>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CP KKU Study Notes</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="/">CP KKU STUDY NOTES</a>
+      <nav>
+        <a href="/">หน้าหลัก</a>
+        <a href="/search">ค้นหาสรุป</a>
+        <a href="/community">พูดคุย</a>
+        <% if (currentUser){ %>
+        <a href="/notifications">แจ้งเตือน</a>
+        <!-- <a href="/posts/new">+ โพสต์สรุป</a> -->
+        <!-- <a href="/threads/new">+ ตั้งคำถาม</a> -->
+        <% if (currentUser.role==='admin'){ %><a href="/admin">แอดมิน</a><% } %>
+        <form action="/logout" method="post" style="display: inline">
+          <button class="linklike">ออกจากระบบ</button>
+        </form>
+        <a href="/profile">โปรไฟล์ (<%= currentUser.username %>)</a>
+        <% } else { %>
+        <a href="/login">เข้าสู่ระบบ</a>
+        <a href="/register">สมัครสมาชิก</a>
+        <% } %>
+      </nav>
+    </header>
+    <main class="container">
+      <h2>โปรไฟล์ของฉัน</h2>
+      <% if (message){ %>
+      <div class="alert"><%= message %></div>
+      <% } %>
+      <form method="post">
+        <label
+          >ชื่อผู้ใช้ <input name="username" value="<%= user.username %>"
+        /></label>
+        <label>อีเมล <input name="email" value="<%= user.email %>" /></label>
+        <label
+          >สาขา/โปรแกรม <input name="program" value="<%= user.program||'' %>"
+        /></label>
+        <label>ชั้นปี <input name="year" value="<%= user.year||'' %>" /></label>
+        <label
+          >แนะนำตัว <textarea name="bio"><%= user.bio||'' %></textarea>
+        </label>
+        <button>บันทึก</button>
+      </form>
+
+      <h1>โปรไฟล์ของคุณ</h1>
+      <div>
+        <p>Username: <%= user.username %></p>
+        <p>Email: <%= user.email %></p>
+      </div>
+      <h2>โพสต์ของคุณ</h2>
+      <div class="cards">
+        <% posts.forEach(p=>{ %>
+        <a class="card" href="/posts/<%= p.slug %>">
+          <% if (p.coverImage){ %><img
+            src="<%= p.coverImage %>"
+            class="cover"
+          /><% } %>
+          <div class="pad">
+            <h3 class="ellipsis"><%= p.title %></h3>
+            <p class="muted">
+              by <%= p.author?.username %> · ♥ <%= p.likes.length %> · 👁️ <%=
+              p.views %>
+            </p>
+            <div class="tags">
+              <% (p.tags||[]).forEach(t=>{ %><span class="tag"><%= t %></span><%
+              }) %>
+            </div>
+          </div>
+        </a>
+        <% }) %>
+      </div>
+    </main>
+  </body>
 </html>
