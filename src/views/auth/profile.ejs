@@ -27,16 +27,48 @@
   </nav>
 </header>
 <main class="container">
-<h2>โปรไฟล์ของฉัน</h2>
-<% if (message){ %><div class="alert"><%= message %></div><% } %>
-<form method="post">
-  <label>ชื่อผู้ใช้ <input name="username" value="<%= user.username %>"/></label>
-  <label>อีเมล <input name="email" value="<%= user.email %>"/></label>
-  <label>สาขา/โปรแกรม <input name="program" value="<%= user.program||'' %>"/></label>
-  <label>ชั้นปี <input name="year" value="<%= user.year||'' %>"/></label>
-  <label>แนะนำตัว <textarea name="bio"><%= user.bio||'' %></textarea></label>
-  <button>บันทึก</button>
-</form>
+  <h2>โปรไฟล์ของฉัน</h2>
+
+  <% if (message){ %>
+    <div class="alert"><%= message %></div>
+  <% } %>
+
+  <div class="profile-info">
+    <p><strong>ชื่อผู้ใช้:</strong> <%= user.username %></p>
+    <p><strong>อีเมล:</strong> <%= user.email %></p>
+    <p><strong>สาขา/โปรแกรม:</strong> <%= user.program || '-' %></p>
+    <p><strong>ชั้นปี:</strong> <%= user.year || '-' %></p>
+    <p><strong>แนะนำตัว:</strong> <%= user.bio || '-' %></p>
+  </div>
+
+  <a href="/edit-profile">แก้ไขโปรไฟล์ </a>
+  <a href="/saved-posts">รายการที่บันทึก</a>
+  <div class="cards">
+    <% if(posts && posts.length > 0){ %>
+      <h2>โพสต์ของคุณ</h2>
+    <% } %>
+    <% posts.forEach(p=>{ %>
+        <a class="card" href="/posts/<%= p.slug %>">
+          <% if (p.coverImage){ %><img
+            src="<%= p.coverImage %>"
+            class="cover"
+          /><% } %>
+          <div class="pad">
+            <h3 class="ellipsis"><%= p.title %></h3>
+            <p class="muted">
+              by <%= p.author?.username %> · ♥ <%= p.likes.length %> · 👁️ <%=
+              p.views %>
+            </p>
+            <div class="tags">
+              <% (p.tags||[]).forEach(t=>{ %><span class="tag"><%= t %></span><%
+              }) %>
+            </div>
+          </div>
+        </a>
+        <% }) %>
+      </div>
+
 </main>
+
 </body>
 </html>
